@@ -1,0 +1,25 @@
+#!/usr/bin/perl
+use strict;
+use warnings;
+
+use Getopt::Long;# qw(:config bundling);
+use lib qw(./);
+use Perlnotes;
+
+use Data::Dumper;
+
+main();
+
+sub main {
+    my $note = Perlnotes->new;
+
+    GetOptions (
+        'new|n|add|a=s' => sub { my ($func, $f) = @_; $note->create($f)},
+        'edit|e=s' => sub { my ($func, $f) =  @_ ; $note->edit($f)},
+        '<>' => \&usage
+    );
+}
+
+sub usage {
+    print "You may one day be well  at this thing you seek to be well at\n";
+}
