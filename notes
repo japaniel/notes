@@ -3,7 +3,7 @@ use strict;
 use warnings;
 
 use Getopt::Long;# qw(:config bundling);
-use lib qw(./);
+use lib qw(lib);
 use Perlnotes;
 
 use Data::Dumper;
@@ -16,10 +16,20 @@ sub main {
     GetOptions (
         'new|n|add|a=s' => sub { my ($func, $f) = @_; $note->create($f)},
         'edit|e=s' => sub { my ($func, $f) =  @_ ; $note->edit($f)},
+        'help|h' => \&usage,
         '<>' => \&usage
     );
+
+    print "finished getting options\n";
 }
 
 sub usage {
-    print "You may one day be well  at this thing you seek to be well at\n";
+	print <<"EOF";
+Usage:
+	--new | -n will create a new file and allow you to edit it.
+	--edit | -e will also for now only do the same thing as the new
+		however if you provide a file name that is already created 
+		it will open that file
+EOF
+    exit;   
 }
